@@ -1,0 +1,4 @@
+
+##: ANNOVAR(2020-06-08): software for annotating snp
+perl table_annovar.pl --buildver ${REF_GENOME_VERSION} --outfile ${sample}.snp --thread 16 --nastring . --otherinfo --remove --protocol refGene --operation g -vcfinput ${sample}.filter.vcf ${REF_ANNP_DIR}
+# REF_ANNP_DIR include annotating files, REF_GENOME_VERSION is annotating files’ prefix
