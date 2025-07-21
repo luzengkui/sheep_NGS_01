@@ -1,0 +1,8 @@
+##:  GATK(4.5.0.0): software for spliting snp and filtering per sample
+
+gatk SelectVariants -R ${REF} -V ${sample}.raw.vcf.gz -select-type SNP --restrict-alleles-to BIALLELIC -O ${sample}.snpraw.vcf.gz && gatk VariantFiltration -R ${REF} -V ${sample}.snpraw.vcf.gz -O ${sample}.snpfilter.vcf.gz --filter-name "QD_filter" -filter "QD < 2.0" --filter-name "FS_filter" -filter "FS > 60.0" --filter-name "MQ_filter" -filter "MQ < 40.0" --filter-name "SOR_filter" -filter "SOR > 3.0" --filter-name "MQRankSum_filter" -filter "MQRankSum < -12.5" --filter-name "ReadPosRankSum_filter" -filter "ReadPosRankSum < -8.0" --filter-name "AC_filter" -filter "AC > 1" --cluster-size 3 --missing-values-evaluate-as-failing
+# ${sample}.filter.vcf is by merging snp and sorting
+
+##: GATK(4.5.0.0): software for selecting snp and filtering for joint results
+${gatk} SelectVariants -R ${ref} -V sheep.vcf.gz -select-type SNP --restrict-alleles-to BIALLELIC -O sheep.snpraw.vcf.gz && ${gatk} VariantFiltration -R ${ref} -V sheep.snpraw.vcf.gz -O sheep.snpfilter.vcf.gz --filter-name "QD_filter" -filter "QD < 2.0" --filter-name "FS_filter" -filter "FS > 60.0" --filter-name "MQ_filter" -filter "MQ < 40.0" --filter-name "SOR_filter" -filter "SOR > 3.0" --filter-name "MQRankSum_filter" -filter "MQRankSum < -12.5" --filter-name "ReadPosRankSum_filter" -filter "ReadPosRankSum < -8.0" --cluster-size 3 --missing-values-evaluate-as-failing
+plink --vcf sheep.snpfilter.vcf.gz --geno 0.1  --maf 0.05 --chr-set 29 --allow-extra-chr --recode vcf --out filter_SNP
