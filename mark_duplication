@@ -1,0 +1,2 @@
+## GATK(4.5.0.0): software for marking duplicate reads; sambamba(1.0.0): software for indexing bam files
+gatk MarkDuplicates -I ${sample}.sorted.bam -O ${sample}.sorted.dedup.bam -M ${sample}.metrics --TMP_DIR ${tmp_dir} && sambamba index -t 16 ${sample}.sorted.dedup.bam
