@@ -1,0 +1,1 @@
+bwa mem -t 16 -M -Y -R "@RG\tID:${sample}\tSM:${sample}\tLB:WES\tPL:Illumina" ${REF_BWA_IDDEX} ${sample}_clean_R1.fq.gz ${sample}_clean_R2.fq.gz | samtools sort -@ 16 -T ${tmp_dir} -o ${sample}.sorted.bam
