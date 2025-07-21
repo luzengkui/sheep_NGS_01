@@ -1,0 +1,7 @@
+##:GATK(4.5.0.0): software for snp calling and genotyping per sample
+
+gatk HaplotypeCaller -I ${sample}.sorted.dedup.bam -R ${REF} -ERC GVCF -O ${sample}.gvcf.gz
+gatk GenotypeGVCFs -R ${REF} -V ${sample}.gvcf.gz -O ${sample}.raw.vcf.gz
+## GATK(4.5.0.0): software for snp joint calling and genotyping from all GVCFs
+gatk GenomicsDBImport -R ${REF} -V ${GVCF_LIST} --genomicsdb-workspace-path sheep_db --intervals ${CHROMS_LIST}
+gatk GenotypeGVCFs -R ${REF} -V gendb://sheep_db/  -O sheep.raw.vcf.gz
