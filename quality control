@@ -1,0 +1,1 @@
+fastp -i ${sample}_R1.fq.gz -I ${sample}_R2.fq.gz -o ${sample}_clean_R1.fq.gz -O ${sample}_clean_R2.fq.gz --thread 16 --json ${sample}.fastp.json
